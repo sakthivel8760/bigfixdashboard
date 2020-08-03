@@ -2,12 +2,10 @@ import { Injectable } from '@angular/core'
 import { throwError as observableThrowError, Observable, of } from 'rxjs'
 import { catchError, map } from 'rxjs/operators'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import get from 'lodash/get';
-
-
+import { get } from 'lodash'
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class DashboardService {
   private http: HttpClient
@@ -19,22 +17,32 @@ export class DashboardService {
     return of({})
   }
 
-  getContentWiseList (): Observable<any> {
-    return this.httpGet('http://168.61.44.82:8080/api/v1/min_fixlets/0/25/0/0').pipe(
-        map(res => res),
-        catchError(this.handleError)
-      );
+  getContentWiseList (fromIndex = 0, toIndex = 25): Observable<any> {
+    return this.httpGet(
+      `http://168.61.44.82:8080/api/v1/min_fixlets/${fromIndex}/${toIndex}/0/0`
+    ).pipe(
+      map(res => res),
+      catchError(this.handleError)
+    )
   }
 
-  httpGet(path: string, module = '0'): Observable<any> {
-    return this.http.get( path)
-      .pipe(
-        map(res => res),
-        catchError(this.handleError)
-      );
+  getCompliance (): Observable<any> {
+    return this.httpGet(
+      'http://168.61.44.82:8080/api/v1/critical/0/25/0/0'
+    ).pipe(
+      map(res => res),
+      catchError(this.handleError)
+    )
   }
 
-  private handleError(error: Response): any {
-    return observableThrowError(get(error, 'error') || {});
+  httpGet (path: string, module = '0'): Observable<any> {
+    return this.http.get(path).pipe(
+      map(res => res),
+      catchError(this.handleError)
+    )
+  }
+
+  private handleError (error: Response): any {
+    return observableThrowError(get(error, 'error') || {})
   }
 }
