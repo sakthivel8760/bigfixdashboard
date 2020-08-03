@@ -1,8 +1,13 @@
 export interface Country {
-    [key: string]: string | number;
-    id: number;
-    name: string;
-    flag: string;
-    area: number;
-    population: number;
+  [key: string]: string | number;
+  id: number;
+  computerName: string;
+  ipaddress: string;
+  relayname: string;
+  computergroup: string;
+  compliance: string;
+  critical: string;
+  important: string;
+  moderate: string;
+  Others: string;
 }
