@@ -15,56 +15,80 @@
       <tr>
         <th scope="col">Id</th>
         <th scope="col" sbSortable="name" (sort)="onSort($event)">
-          <span>Country</span
-          ><sb-sort-icon
-            *ngIf="sortedColumn === 'name'"
-            [direction]="sortedDirection"
-          ></sb-sort-icon>
+          <span>Name</span
+          >
         </th>
         <th scope="col" sbSortable="area" (sort)="onSort($event)">
-          <span>Area</span
-          ><sb-sort-icon
-            *ngIf="sortedColumn === 'area'"
-            [direction]="sortedDirection"
-          ></sb-sort-icon>
+          <span>Category</span
+          >
         </th>
         <th scope="col" sbSortable="population" (sort)="onSort($event)">
-          <span>Population</span
-          ><sb-sort-icon
-            *ngIf="sortedColumn === 'population'"
-            [direction]="sortedDirection"
-          ></sb-sort-icon>
+          <span>Source Severity</span
+          >
+        </th>
+        <th scope="col" sbSortable="population" (sort)="onSort($event)">
+          <span>Source Release Date</span
+          >
+        </th>
+        <th scope="col" sbSortable="population" (sort)="onSort($event)">
+          <span>Source ID</span
+          >
+        </th>
+        <th scope="col" sbSortable="population" (sort)="onSort($event)">
+          <span>Source</span
+          >
+        </th>
+        <th scope="col" sbSortable="population" (sort)="onSort($event)">
+          <span>ID</span
+          >
+        </th>
+        <th scope="col" sbSortable="population" (sort)="onSort($event)">
+          <span>Download Size</span
+          >
+        </th>
+        <th scope="col" sbSortable="population" (sort)="onSort($event)">
+          <span>Type</span
+          >
+        </th>
+        <th scope="col" sbSortable="population" (sort)="onSort($event)">
+          <span>Sitename</span
+          >
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let country of countries$ | async">
-        <th scope="row">{{ country.id }}</th>
+      <tr *ngFor="let tableEntry of currentPage; let i= index ">
+        <th scope="row">{{ i+1 }}</th>
         <td>
-          <img
-            class="mr-2"
-            [src]="
-              'https://upload.wikimedia.org/wikipedia/commons/' + country.flag
-            "
-            style="width: 20px;"
-          /><ngb-highlight
-            [result]="country.name"
-            [term]="countryService.searchTerm"
-          ></ngb-highlight>
+        {{ tableEntry["Name"]}}
         </td>
         <td>
-          <ngb-highlight
-            [result]="country.area | number"
-            [term]="countryService.searchTerm"
-          ></ngb-highlight>
+        {{ tableEntry["Category"]}}
         </td>
         <td>
-          <ngb-highlight
-            [result]="country.population | number"
-            [term]="countryService.searchTerm"
-          ></ngb-highlight>
+        {{ tableEntry["Source Serverity"]}}
         </td>
-      </tr>
+        <td>
+        {{ tableEntry["Source Release Date"]}}
+        </td>
+        <td>
+        {{ tableEntry["Source ID"]}}
+        </td>
+        <td>
+        {{ tableEntry["Source"]}}
+        </td>
+        <td>
+        {{ tableEntry["ID"]}}
+        </td>
+        <td>
+        {{ tableEntry["Download Size"]}}
+        </td>
+        <td>
+        {{ tableEntry["type"]}}
+        </td>
+        <td>
+        {{ tableEntry["Sitename"]}}
+        </td>
     </tbody>
   </table>
   <div class="d-flex justify-content-between p-2">

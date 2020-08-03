@@ -3,7 +3,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">Id</th>
+                <th scope="col">#</th>
                 <th scope="col" sbSortable="name" (sort)="onSort($event)"><span>Country</span><sb-sort-icon *ngIf='sortedColumn === "name"' [direction]="sortedDirection"></sb-sort-icon></th>
                 <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Area</span><sb-sort-icon *ngIf='sortedColumn === "area"' [direction]="sortedDirection"></sb-sort-icon></th>
                 <th scope="col" sbSortable="population" (sort)="onSort($event)"><span>Population</span><sb-sort-icon *ngIf='sortedColumn === "population"' [direction]="sortedDirection"></sb-sort-icon></th>

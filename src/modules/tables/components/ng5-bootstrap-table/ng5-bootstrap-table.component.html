@@ -5,8 +5,8 @@
       class="form-control ml-2"
       type="text"
       name="searchTerm"
-      [(ngModel)]="countryService.searchTerm"
-    /><span class="ml-3" *ngIf="countryService.loading$ | async"
+      [(ngModel)]="searchTerm"
+    /><span class="ml-3" *ngIf="loading"
       >Loading...</span
     >
   </div>
@@ -15,69 +15,79 @@
       <tr>
         <th scope="col">Id</th>
         <th scope="col" sbSortable="name" (sort)="onSort($event)">
-          <span>Country</span
-          ><sb-sort-icon
-            *ngIf="sortedColumn === 'name'"
-            [direction]="sortedDirection"
-          ></sb-sort-icon>
+          <span>Name</span
+          >
         </th>
         <th scope="col" sbSortable="area" (sort)="onSort($event)">
-          <span>Area</span
-          ><sb-sort-icon
-            *ngIf="sortedColumn === 'area'"
-            [direction]="sortedDirection"
-          ></sb-sort-icon>
+          <span>Category</span
+          >
         </th>
         <th scope="col" sbSortable="population" (sort)="onSort($event)">
-          <span>Population</span
-          ><sb-sort-icon
-            *ngIf="sortedColumn === 'population'"
-            [direction]="sortedDirection"
-          ></sb-sort-icon>
+          <span>Source Severity</span
+          >
+        </th>
+        <th scope="col" sbSortable="population" (sort)="onSort($event)">
+          <span>Source ID</span
+          >
+        </th>
+        <th scope="col" sbSortable="population" (sort)="onSort($event)">
+          <span>Site</span
+          >
+        </th>
+        <th scope="col" sbSortable="population" (sort)="onSort($event)">
+          <span>Source</span
+          >
+        </th>
+        <th scope="col" sbSortable="population" (sort)="onSort($event)">
+          <span>Source Release</span
+          >
+        </th>
+        <th scope="col" sbSortable="population" (sort)="onSort($event)">
+          <span>Progress</span
+          >
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let country of countries$ | async">
-        <th scope="row">{{ country.id }}</th>
+      <tr *ngFor="let contentWiseData of currentPage; let i = index">
+        <th scope="row">{{ i+1 }}</th>
         <td>
-          <img
-            class="mr-2"
-            [src]="
-              'https://upload.wikimedia.org/wikipedia/commons/' + country.flag
-            "
-            style="width: 20px;"
-          /><ngb-highlight
-            [result]="country.name"
-            [term]="countryService.searchTerm"
-          ></ngb-highlight>
+        {{contentWiseData.Name}}
         </td>
         <td>
-          <ngb-highlight
-            [result]="country.area | number"
-            [term]="countryService.searchTerm"
-          ></ngb-highlight>
+        {{contentWiseData.Category}}
         </td>
         <td>
-          <ngb-highlight
-            [result]="country.population | number"
-            [term]="countryService.searchTerm"
-          ></ngb-highlight>
+        {{contentWiseData["Source Severity"]}}
+        </td>
+        <td>
+        {{contentWiseData["Source ID"]}}
+        </td>
+        <td>
+        {{contentWiseData["Sitename"]}}
+        </td>
+        <td>
+        {{contentWiseData["Source"]}}
+        </td>
+        <td>
+        {{contentWiseData["Source Release Date"]}}
+        </td>
+        <td>
+        {{contentWiseData["Progress"]}}
         </td>
       </tr>
     </tbody>
   </table>
-  <div class="d-flex justify-content-between p-2">
+    <div class="d-flex justify-content-between p-2">
     <ngb-pagination
-      [collectionSize]="total$ | async"
-      [(page)]="countryService.page"
-      [pageSize]="countryService.pageSize"
+      [collectionSize]="tableData.length"
+      [pageSize]="pageSize"
     ></ngb-pagination
     ><select
       class="custom-select"
       style="width: auto;"
       name="pageSize"
-      [(ngModel)]="countryService.pageSize"
+      [(ngModel)]="pageSize"
       ><option [ngValue]="2">2 items per page</option
       ><option [ngValue]="4">4 items per page</option
       ><option [ngValue]="6">6 items per page</option></select
